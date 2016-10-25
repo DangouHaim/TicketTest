@@ -1,0 +1,110 @@
+﻿@model  IEnumerable<TicketTest.Models.Order>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using TicketTest.Models;
+    <div class="top">
+        <div class="topPart">
+            @using (Html.BeginForm("Reserve", "Res"))
+            {
+                <div class="field">
+                    <select id="Flight" name="Flight">
+                        @using (DBEntities db = new DBEntities())
+                        {
+                            foreach (var v in db.Flight)
+                            {
+                                <option value="@v.ID">№ @v.FlightNum Рейс: @v.FlightName Стоимость: @v.TicketCost</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="smBtn">
+                    <input type="submit" value="Забронировать" />
+                </div>
+            }
+        </div>
+
+        <div class="topPart">
+            @using (Html.BeginForm("Purcast", "Res"))
+            {
+                <div class="field">
+                    <select id="Purcast" name="Purcast">
+                        @{
+                            using (DBEntities db = new DBEntities())
+                            {
+                                foreach (var v in db.Order)
+                                {
+                                    if (v.OwnerID.ToString() == @HttpContext.Current.Request.Cookies["uid"].Value)
+                                    {
+                                        string f = db.Flight.Find(v.FlightID).FlightName;
+                                        string o = db.User.Find(v.OwnerID).Name;
+                                        <option value="@v.ID">
+                                            Имя: @o Рейс: @f Статус: @v.Status
+                                        </option>
+                                    }
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="smBtn">
+                    <input type="submit" value="Купить" />
+                </div>
+            }
+        </div>
+
+        <div class="topPartMain">
+            <div class="longBtn">
+                @using (Html.BeginForm("Index", "Main"))
+                {
+                    <input type="submit" value="На главную" />
+                }
+            </div>
+
+            <div class="longBtn">
+                @using (Html.BeginForm("Show", "Res"))
+                {
+                    <input type="submit" value="Показать мои заказы" />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="list container">
+        @{
+            foreach (var v in Model)
+            {
+                <div class="item row">
+                    <div class="iSet col-md-12">
+                        @{string f = "";}
+                        @using (DBEntities db = new DBEntities())
+                        {
+                            foreach (var vv in db.Flight)
+                            {
+                                if (v.FlightID == vv.ID)
+                                {
+                                    f = vv.FlightName;
+                                }
+                            }
+                        }
+                        Название рейса: @f
+                    </div>
+                    <div class="iSet col-md-12">
+                        Статус; @v.Status
+                    </div>
+                </div><br />
+                            }
+        }
+    </div>
+</body>
+</html>

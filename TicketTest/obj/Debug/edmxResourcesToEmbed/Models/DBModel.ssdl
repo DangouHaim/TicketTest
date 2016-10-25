@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BusStation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="255" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartBusStationID" Type="int" Nullable="false" />
+    <Property Name="EndBusStationID" Type="int" Nullable="false" />
+    <Property Name="DateTimeFrom" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateTimeTo" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="TravelLong" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="FlightNum" Type="int" Nullable="false" />
+    <Property Name="FlightName" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="PlacesCount" Type="int" Nullable="false" />
+    <Property Name="TicketCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FlightID" Type="int" Nullable="false" />
+    <Property Name="OwnerID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserLname" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserDocNum" Type="int" Nullable="false" />
+    <Property Name="UserNum" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="LName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mail" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Pass" Type="nchar" MaxLength="255" Nullable="false" />
+    <Property Name="BirthDate" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="BusStation" EntityType="Self.BusStation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

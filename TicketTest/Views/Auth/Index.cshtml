@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Auth</title>
+</head>
+<body>
+    <div class="authorize">
+        @using (Html.BeginForm("Authorize", "Auth", FormMethod.Post))
+        {
+            @Html.TextBox("Mail");
+            @Html.Password("Pass");
+            <input type="submit" value="Sign Up" />
+        }
+    </div>
+</body>
+</html>

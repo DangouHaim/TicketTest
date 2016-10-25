@@ -1,0 +1,72 @@
+﻿@model  IEnumerable<TicketTest.Models.Flight>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="top">
+        <div class="topPart">
+            @using (Html.BeginForm("BusStationSearch", "Main"))
+            {
+                <div class='field'>
+                    @Html.TextBox("Query");
+                </div>
+                <div class='smBtn'>
+                    <input type="submit" value="Найти остановку" />
+                </div>
+            }
+        </div>
+        <div class="topPart">
+            @using (Html.BeginForm("FlightSearch", "Main"))
+            {
+                <div class='field'>
+                    @Html.TextBox("StartPointName");
+                    @Html.TextBox("EndPointName");
+                    <input id="Date" name="Date" type="date" min="1920-01-01" max="@DateTime.Today.ToString()">
+                </div>
+                <div class="smBtn">
+                    <input type="submit" value="Найти рейс" />
+                </div>
+            }
+        </div>
+        <div class="topPartMain">
+            @using (Html.BeginForm("ReserveOrPurcast", "Main"))
+            {
+                <div class="longBtn">
+                    <input type="submit" value="Забронировать или купить" />
+                </div>
+            }
+        </div>
+    </div>
+    @{
+        <div class="list container">
+            @foreach (var v in Model)
+            {
+                <div class="item row">
+                    <div class="iSet col-md-6">
+                        № @v.FlightNum
+                    </div>
+                    <div class="iSet col-md-6">
+                        Имя рейса: @v.FlightName
+                    </div>
+                    <div class="iSet col-md-6">
+                        Дафта отправления: @v.DateTimeFrom
+                    </div>
+                    <div class="iSet col-md-6">
+                        Дафта прибытия: @v.DateTimeTo
+                    </div>
+                </div><br />
+            }
+        </div>
+    }
+</body>
+</html>

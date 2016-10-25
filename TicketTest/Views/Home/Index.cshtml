@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="root">
+        <div class="RegAuth">
+            <div class="RegAuth-content">
+                <div class="desc">Для продолжения рабыты необходимо войти или зарегестрироваться.</div>
+                <div class="smBtn">
+                    @using (Html.BeginForm("Index", "Reg"))
+                    {
+                        <input type="submit" value="Регистрация" />
+                    }
+                </div>
+                <div class="smBtn">
+                    @using (Html.BeginForm("Index", "Auth"))
+                    {
+                        <input type="submit" value="Вход" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

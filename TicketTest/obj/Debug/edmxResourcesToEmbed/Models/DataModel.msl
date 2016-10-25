@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DBEntities">
+    <EntitySetMapping Name="BusStation">
+      <EntityTypeMapping TypeName="DatabaseModel.BusStation">
+        <MappingFragment StoreEntitySet="BusStation">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flight">
+      <EntityTypeMapping TypeName="DatabaseModel.Flight">
+        <MappingFragment StoreEntitySet="Flight">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StartBusStationID" ColumnName="StartBusStationID" />
+          <ScalarProperty Name="EndBusStationID" ColumnName="EndBusStationID" />
+          <ScalarProperty Name="DateTimeFrom" ColumnName="DateTimeFrom" />
+          <ScalarProperty Name="DateTimeTo" ColumnName="DateTimeTo" />
+          <ScalarProperty Name="TravelLong" ColumnName="TravelLong" />
+          <ScalarProperty Name="FlightNum" ColumnName="FlightNum" />
+          <ScalarProperty Name="FlightName" ColumnName="FlightName" />
+          <ScalarProperty Name="PlacesCount" ColumnName="PlacesCount" />
+          <ScalarProperty Name="TicketCost" ColumnName="TicketCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="DatabaseModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FlightID" ColumnName="FlightID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ticket">
+      <EntityTypeMapping TypeName="DatabaseModel.Ticket">
+        <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserLname" ColumnName="UserLname" />
+          <ScalarProperty Name="UserDocNum" ColumnName="UserDocNum" />
+          <ScalarProperty Name="UserNum" ColumnName="UserNum" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="DatabaseModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

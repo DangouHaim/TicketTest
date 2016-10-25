@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DANGOU\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TICKETTEST\TICKETTEST\APP_DATA\DATABASE.MDF.dbo.BusStation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BusStation">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="255" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DANGOU\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TICKETTEST\TICKETTEST\APP_DATA\DATABASE.MDF.dbo.Flight' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="StartBusStationID" />
+      <PropertyRef Name="EndBusStationID" />
+      <PropertyRef Name="DateTimeFrom" />
+      <PropertyRef Name="DateTimeTo" />
+      <PropertyRef Name="TravelLong" />
+      <PropertyRef Name="FlightNum" />
+      <PropertyRef Name="FlightName" />
+      <PropertyRef Name="PlacesCount" />
+      <PropertyRef Name="TicketCost" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="StartBusStationID" Type="int" Nullable="false" />
+    <Property Name="EndBusStationID" Type="int" Nullable="false" />
+    <Property Name="DateTimeFrom" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="DateTimeTo" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="TravelLong" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="FlightNum" Type="int" Nullable="false" />
+    <Property Name="FlightName" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="PlacesCount" Type="int" Nullable="false" />
+    <Property Name="TicketCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DANGOU\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TICKETTEST\TICKETTEST\APP_DATA\DATABASE.MDF.dbo.Order' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="FlightID" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="FlightID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DANGOU\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TICKETTEST\TICKETTEST\APP_DATA\DATABASE.MDF.dbo.Ticket' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="UserName" />
+      <PropertyRef Name="UserLname" />
+      <PropertyRef Name="UserDocNum" />
+      <PropertyRef Name="UserNum" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserLname" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserDocNum" Type="int" Nullable="false" />
+    <Property Name="UserNum" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\DANGOU\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\TICKETTEST\TICKETTEST\APP_DATA\DATABASE.MDF.dbo.User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="LName" />
+      <PropertyRef Name="Mail" />
+      <PropertyRef Name="Pass" />
+      <PropertyRef Name="BirthDate" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="LName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mail" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Pass" Type="nchar" MaxLength="255" Nullable="false" />
+    <Property Name="BirthDate" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="DatabaseModelStoreContainer">
+    <EntitySet Name="BusStation" EntityType="Self.BusStation" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BusStation].[ID] AS [ID], 
+    [BusStation].[Name] AS [Name], 
+    [BusStation].[Description] AS [Description], 
+    [BusStation].[Status] AS [Status]
+    FROM [dbo].[BusStation] AS [BusStation]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Flight" EntityType="Self.Flight" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Flight].[ID] AS [ID], 
+    [Flight].[StartBusStationID] AS [StartBusStationID], 
+    [Flight].[EndBusStationID] AS [EndBusStationID], 
+    [Flight].[DateTimeFrom] AS [DateTimeFrom], 
+    [Flight].[DateTimeTo] AS [DateTimeTo], 
+    [Flight].[TravelLong] AS [TravelLong], 
+    [Flight].[FlightNum] AS [FlightNum], 
+    [Flight].[FlightName] AS [FlightName], 
+    [Flight].[PlacesCount] AS [PlacesCount], 
+    [Flight].[TicketCost] AS [TicketCost]
+    FROM [dbo].[Flight] AS [Flight]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Order" EntityType="Self.Order" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Order].[ID] AS [ID], 
+    [Order].[FlightID] AS [FlightID], 
+    [Order].[Status] AS [Status]
+    FROM [dbo].[Order] AS [Order]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Ticket].[ID] AS [ID], 
+    [Ticket].[OrderID] AS [OrderID], 
+    [Ticket].[UserName] AS [UserName], 
+    [Ticket].[UserLname] AS [UserLname], 
+    [Ticket].[UserDocNum] AS [UserDocNum], 
+    [Ticket].[UserNum] AS [UserNum], 
+    [Ticket].[Status] AS [Status]
+    FROM [dbo].[Ticket] AS [Ticket]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [User].[ID] AS [ID], 
+    [User].[Name] AS [Name], 
+    [User].[LName] AS [LName], 
+    [User].[Mail] AS [Mail], 
+    [User].[Pass] AS [Pass], 
+    [User].[BirthDate] AS [BirthDate]
+    FROM [dbo].[User] AS [User]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
