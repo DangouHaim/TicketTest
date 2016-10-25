@@ -21,41 +21,50 @@ namespace TicketTest.Controllers
         [HttpPost]
         public ActionResult Register(string Name, string LName, string Mail, string Pass, string ComformPass, string BirthDate)
         {
-            if(!string.IsNullOrWhiteSpace(Name) &&
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(Name) &&
                 !string.IsNullOrWhiteSpace(LName) &&
                 !string.IsNullOrWhiteSpace(Mail) &&
                 !string.IsNullOrWhiteSpace(Pass) &&
                 !string.IsNullOrWhiteSpace(ComformPass) &&
                 !string.IsNullOrWhiteSpace(BirthDate))
-            {
-                if(!ThisUserExist(Mail) && Pass == ComformPass)
                 {
-                    MD5 md5 = new MD5CryptoServiceProvider();
-                    byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes(Pass));
-                    string result = BitConverter.ToString(checkSum).Replace("-", String.Empty);
-                    Pass = result;
+                    if (!ThisUserExist(Mail) && Pass == ComformPass)
+                    {
+                        MD5 md5 = new MD5CryptoServiceProvider();
+                        byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes(Pass));
+                        string result = BitConverter.ToString(checkSum).Replace("-", String.Empty);
+                        Pass = result;
 
-                    User u = new User() { Name = Name, LName = LName, Mail = Mail, Pass = Pass, BirthDate = BirthDate };
-                    db.User.Add(u);
-                    db.SaveChanges();
+                        User u = new User() { Name = Name, LName = LName, Mail = Mail, Pass = Pass, BirthDate = BirthDate };
+                        db.User.Add(u);
+                        db.SaveChanges();
 
-                    return Redirect("/Auth/Index");
+                        HttpContext.Response.Cookies["uid"].Value = "";
+                        return Redirect("/Auth/Index");
+                    }
                 }
             }
+            catch { }
             return PartialView("FormError");
         }
 
         public bool ThisUserExist(string Mail)
         {
             bool res = false;
-            foreach(var v in db.User)
+            try
             {
-                if(v.Mail.ToLower().Trim() == Mail.ToLower().Trim())
+                foreach (var v in db.User)
                 {
-                    res = true;
-                    break;
+                    if (v.Mail.ToLower().Trim() == Mail.ToLower().Trim())
+                    {
+                        res = true;
+                        break;
+                    }
                 }
             }
+            catch { }
             return res;
         }
     }

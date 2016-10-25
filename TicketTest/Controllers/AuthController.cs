@@ -24,35 +24,49 @@ namespace TicketTest.Controllers
 
         public ActionResult Authorize(string Mail, string Pass)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes(Pass));
-            string result = BitConverter.ToString(checkSum).Replace("-", String.Empty);
-            Pass = result;
-            
-            if (AuthCheckk(Mail, Pass))
+            try
             {
-                return Redirect("/Main/Index");
+                MD5 md5 = new MD5CryptoServiceProvider();
+                byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes(Pass));
+                string result = BitConverter.ToString(checkSum).Replace("-", String.Empty);
+                Pass = result;
+
+                if (AuthCheckk(Mail, Pass))
+                {
+                    return Redirect("/Main/Index");
+                }
             }
+            catch { }
             return PartialView("FormError");
         }
 
         private bool AuthCheckk(string mail, string pass)
         {
             bool res = false;
-            if(!string.IsNullOrWhiteSpace(mail) &&
-                !string.IsNullOrWhiteSpace(pass))
+            try
             {
-                foreach(var v in db.User)
+                if (!string.IsNullOrWhiteSpace(mail) &&
+                !string.IsNullOrWhiteSpace(pass))
                 {
-                    if(v.Mail.ToLower().Trim() == mail.ToLower().Trim() &&
-                        v.Pass.Trim() == pass.Trim())
+                    foreach (var v in db.User)
                     {
-                        HttpContext.Response.Cookies["uid"].Value = v.ID.ToString();
-                        res = true;
+                        if (v.Mail.ToLower().Trim() == mail.ToLower().Trim() &&
+                            v.Pass.Trim() == pass.Trim())
+                        {
+                            HttpContext.Response.Cookies["uid"].Value = v.ID.ToString();
+                            res = true;
+                        }
                     }
                 }
             }
+            catch { }
             return res;
+        }
+
+        public ActionResult LogOut()
+        {
+            HttpContext.Response.Cookies["uid"].Value = "";
+            return Redirect("/Home/Index");
         }
     }
 }

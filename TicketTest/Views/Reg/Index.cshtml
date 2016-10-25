@@ -12,17 +12,31 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="register">
-        @using (Html.BeginForm("Register", "Reg", FormMethod.Post))
-        {
-            @Html.TextBox("Name");
-            @Html.TextBox("LName");
-            @Html.TextBox("Mail");
-            @Html.Password("Pass");
-            @Html.Password("ComformPass");
-            <input id="BirthDate" name="BirthDate" type="date" min="1920-01-01" max="@DateTime.Today.ToString()"><br>
-            <input type="submit" value="Sign Up" />
-        }
+    <div class="top regBox">
+        <div class="topPart">
+            @using (Html.BeginForm("Register", "Reg", FormMethod.Post))
+            {
+                <div class="field register">
+                    <label>Имя</label>
+                    @Html.TextBox("Name");
+                    <label>Фамилия</label>
+                    @Html.TextBox("LName");
+                    <label>Дата рождения</label>
+                    <input id="BirthDate" name="BirthDate" type="date" min="1920-01-01" max="@DateTime.Today.ToString()">
+                    <label>E-mail</label>
+                    @Html.TextBox("Mail");
+                    <label>Пароль</label>
+                    @Html.Password("Pass");
+                    <label>Повторите пароль</label>
+                    @Html.Password("ComformPass");
+                </div>
+                <div class="topPartMain">
+                    <div class="smBtn">
+                        <input type="submit" value="Регистрация" />
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </body>
 </html>

@@ -13,6 +13,12 @@
     <title>Index</title>
 </head>
 <body>
+    <div class="logOut smBtn">
+        @using (Html.BeginForm("LogOut", "Auth"))
+        {
+            <input type="submit" value="Выход" />
+        }
+    </div>
     @using TicketTest.Models;
     <div class="top">
         <div class="topPart">

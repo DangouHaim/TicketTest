@@ -27,62 +27,73 @@ namespace TicketTest.Controllers
 
         public ActionResult Reserve(string Flight)
         {
-            if(!string.IsNullOrWhiteSpace(HttpContext.Request.Cookies["uid"].Value))
+            try
             {
-                int fid = -1;
                 if(!string.IsNullOrWhiteSpace(Flight))
                 {
-                    fid = int.Parse(Flight);
-                }
-                Flight fl = db.Flight.Find(fid);
-
-                if (fl.PlacesCount > 0)
-                {
-                    Order o = new Order()
+                    if (!string.IsNullOrWhiteSpace(HttpContext.Request.Cookies["uid"].Value))
                     {
-                        FlightID = fid,
-                        OwnerID = int.Parse(HttpContext.Request.Cookies["uid"].Value),
-                        Status = "Reserved"
-                    };
-                    db.Order.Add(o);
-                    db.SaveChanges();
+                        int fid = -1;
+                        if (!string.IsNullOrWhiteSpace(Flight))
+                        {
+                            fid = int.Parse(Flight);
+                        }
+                        Flight fl = db.Flight.Find(fid);
 
-                    if (fl != null)
-                    {
-                        fl.PlacesCount--;
-                        db.SaveChanges();
+                        if (fl.PlacesCount > 0)
+                        {
+                            Order o = new Order()
+                            {
+                                FlightID = fid,
+                                OwnerID = int.Parse(HttpContext.Request.Cookies["uid"].Value),
+                                Status = "Reserved"
+                            };
+                            db.Order.Add(o);
+                            db.SaveChanges();
+
+                            if (fl != null)
+                            {
+                                fl.PlacesCount--;
+                                db.SaveChanges();
+                            }
+                        }
                     }
                 }
             }
+            catch { }
             return Index();
         }
 
         public ActionResult Purcast(string Purcast)
         {
-            int pc = -1;
-            if(!string.IsNullOrWhiteSpace(Purcast))
+            try
             {
-                pc = int.Parse(Purcast);
-            }
-
-            Order o = db.Order.Find(pc);
-            if (o != null)
-            {
-                o.Status = "Purcasted";
-                db.SaveChanges();
-
-                Ticket t = new Ticket()
+                int pc = -1;
+                if (!string.IsNullOrWhiteSpace(Purcast))
                 {
-                    OrderID = o.ID,
-                    Status = o.Status,
-                    UserNum = o.OwnerID,
-                    UserName = db.User.Find(o.OwnerID).Name.Trim(),
-                    UserLname = db.User.Find(o.OwnerID).LName.Trim(),
-                    UserDocNum = o.ID
-                };
-                db.Ticket.Add(t);
-                db.SaveChanges();
+                    pc = int.Parse(Purcast);
+                }
+
+                Order o = db.Order.Find(pc);
+                if (o != null)
+                {
+                    o.Status = "Purcasted";
+                    db.SaveChanges();
+
+                    Ticket t = new Ticket()
+                    {
+                        OrderID = o.ID,
+                        Status = o.Status,
+                        UserNum = o.OwnerID,
+                        UserName = db.User.Find(o.OwnerID).Name.Trim(),
+                        UserLname = db.User.Find(o.OwnerID).LName.Trim(),
+                        UserDocNum = o.ID
+                    };
+                    db.Ticket.Add(t);
+                    db.SaveChanges();
+                }
             }
+            catch { }
             return Redirect("/Res/Index");
         }
 

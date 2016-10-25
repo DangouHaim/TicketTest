@@ -128,6 +128,10 @@ textarea {
     color: black;
 }
 
+.field label {
+    color: #9595A6;
+}
+
 .list {
     margin: 10px 50px;
     margin-left: 0;
@@ -144,4 +148,31 @@ textarea {
 
 .item > .iSet {
     display: inline-block;
+}
+
+.register input {
+    display: block;
+}
+
+.regBox {
+    margin: 5% 20%;
+    background-color: transparent;
+}
+
+.has-error {
+    color: #32323A;
+}
+
+.logOut {
+    z-index: 3;
+    margin: 0;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.logOut input {
+    text-transform: uppercase;
+    width: 60px;
+    height: 20px;
 }

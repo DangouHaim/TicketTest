@@ -12,13 +12,21 @@
     <title>Auth</title>
 </head>
 <body>
-    <div class="authorize">
-        @using (Html.BeginForm("Authorize", "Auth", FormMethod.Post))
-        {
-            @Html.TextBox("Mail");
-            @Html.Password("Pass");
-            <input type="submit" value="Sign Up" />
-        }
+    <div class="top regBox">
+        <div class="topPart">
+            @using (Html.BeginForm("Authorize", "Auth", FormMethod.Post))
+            {
+                <div class="field">
+                    <label>E-mail</label>
+                    @Html.TextBox("Mail");
+                    <label>Пароль</label>
+                    @Html.Password("Pass");
+                </div>
+                <div class="smBtn">
+                    <input type="submit" value="Вход" />
+                </div>
+            }
+        </div>
     </div>
 </body>
 </html>
